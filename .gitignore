@@ -1,0 +1,12 @@
+# Python compile files
+*.pyc
+*/__pychache__/*
+
+# Database migration files
+*/migrations/*
+
+# Setting file
+cms/settings.py
+
+# IDE
+.idea/
