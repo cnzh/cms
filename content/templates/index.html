@@ -1,20 +1,14 @@
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Index</title>
-</head>
-<body>
-    <div>
-        <h1><a href="/">CMS</a></h1>
-    </div>
-    {% for post in posts %}
-    <div>
-        <p>published: {{ post.published_date }}</p>
-            <h1><a href="">{{ post.title }}</a></h1>
-            <p>{{ post.text|linebreaks }}</p>
-    </div>
-    {% endfor %}
-</body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+{% for post in posts %}
+<div class="jumbotron">
+    <h1 class="display-3">{{ post.title }}</h1>
+    <p class="lead">published: {{ post.published_date }}</p>
+    <hr class="my-4">
+    <p>{{ post.text|linebreaks }}</p>
+    <p class="lead">
+        <a class="btn btn-primary btn-lg" href="{% url 'content:post_view' pk=post.pk %}" role="button">Learn more</a>
+    </p>
+</div>
+{% endfor %}
+{% endblock content %}
