@@ -1,14 +1,35 @@
 {% extends 'base.html' %}
-{% block content %}
-{% for post in posts %}
-<div class="jumbotron">
-    <h1 class="display-3">{{ post.title }}</h1>
-    <p class="lead">published: {{ post.published_date }}</p>
-    <hr class="my-4">
-    <p>{{ post.text|linebreaks }}</p>
-    <p class="lead">
-        <a class="btn btn-primary btn-lg" href="{% url 'content:post_view' pk=post.pk %}" role="button">Learn more</a>
-    </p>
+{% block content_main %}
+<div class="col-md-8">
+
+    <h1 class="my-4">Page Heading
+        <small>Secondary Text</small>
+    </h1>
+    <!-- Blog Entries Column -->
+
+    {% for post in posts %}
+    <div class="card mb-4">
+        <!--<img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">-->
+        <div class="card-body">
+            <h2 class="card-title">{{ post.title }}</h2>
+            <p class="card-text">{{ post.text|linebreaks }}</p>
+            <a href="{% url 'content:post_view' pk=post.pk %}" class="btn btn-primary">Read More &rarr;</a>
+        </div>
+        <div class="card-footer text-muted">
+            {{ post.published_date }} by
+            <a href="#">{{ post.author }}</a>
+        </div>
+    </div>
+    {% endfor %}
+
+    <!-- Pagination -->
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+            <a class="page-link" href="#">&larr; Older</a>
+        </li>
+        <li class="page-item disabled">
+            <a class="page-link" href="#">Newer &rarr;</a>
+        </li>
+    </ul>
 </div>
-{% endfor %}
-{% endblock content %}
+{% endblock %}

@@ -1,15 +1,94 @@
 {% extends 'base.html' %}
 
-{% block content %}
-<div class="date">
-    {% if post.published_date %}
-        {{ post.published_date }}
-    {% else %}
+{% block content_main %}
+
+<!-- Post Content Column -->
+
+<div class="col-lg-8">
+
+
+    <!-- Title -->
+    <h1 class="mt-4">{{ post.title }}</h1>
+
+    <!-- Author -->
+    <p class="lead">
+        by
+        <a href="#">Start Bootstrap</a>
+    </p>
+
+    <hr>
+
+    <!-- Date/Time -->
+    <p>
+        {% if post.published_date %}
+        Post on {{ post.published_date }}
+        {% else %}
         <a class="btn btn-default" href="{% url 'content:post_publish' pk=post.pk %}">Publish</a>
-    {% endif %}
+        {% endif %}
+        <a class="btn btn-default" href="{% url 'content:post_edit' pk=post.pk %}">Edit Post</a>
+        <a class="btn btn-default" href="{% url 'content:post_delete' pk=post.pk %}">Delete Post</a>
+    </p>
+
+    <hr>
+
+    <!-- Preview Image -->
+    <!-- <img class="img-fluid rounded" src="http://placehold.it/900x300" alt=""> -->
+
+    <hr>
+
+    <!-- Post Content -->
+    <p>{{ post.text|linebreaks }}</p>
+
+    <hr>
+
+    <!-- Comments Form -->
+    <div class="card my-4">
+        <h5 class="card-header">Leave a Comment:</h5>
+        <div class="card-body">
+            <form>
+                <div class="form-group">
+                    <textarea class="form-control" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Single Comment -->
+    <div class="media mb-4">
+        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+        <div class="media-body">
+            <h5 class="mt-0">Commenter Name</h5>
+            Comment 01
+        </div>
+    </div>
+
+    <!-- Comment with nested comments -->
+    <div class="media mb-4">
+        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+        <div class="media-body">
+            <h5 class="mt-0">Commenter Name</h5>
+            Comment 02
+
+            <div class="media mt-4">
+                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                <div class="media-body">
+                    <h5 class="mt-0">Commenter Name</h5>
+                    Comment 021
+                </div>
+            </div>
+
+            <div class="media mt-4">
+                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                <div class="media-body">
+                    <h5 class="mt-0">Commenter Name</h5>
+                    Comment 022
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 </div>
-<a class="btn btn-default" href="{% url 'content:post_edit' pk=post.pk %}">Edit Post</a>
-<a class="btn btn-default" href="{% url 'content:post_delete' pk=post.pk %}">Delete Post</a>
-<h1>{{ post.title }}</h1>
-<p>{{ post.text|linebreaks }}</p>
+
 {% endblock %}
